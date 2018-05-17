@@ -29,22 +29,22 @@ export class WorkItemQuickPreview extends ui.BaseElement {
     this.$('assignee-selector div.select-dropdown'),
     'Assignee dropdown menu');
   assigneeDiv = new ui.BaseElement(this.$('f8-assignee'), 'Assignee List Div');
+
+  areaDiv = new ui.BaseElement(this.$('.area-dropdown'), 'Assignee List Div');
   areaDropdown = new ui.Dropdown(
-    this.$('#area-dropdown > div > span'),
-    this.$('ul.item-ul.dropdown-list'),
+    this.areaDiv.$('f8-select-dropdown>div>span'),
+    this.areaDiv.$('.select-dropdown-menu'),
     'Area select dropdown'
   );
-  areaSaveButton = new ui.Button(this.$('#area-dropdown .save-button'), 'Area save button');
-  areaCancelButton = new ui.Button(this.$('#area-dropdown .cancel-button'), 'Area cancel button');
 
+  iterationDiv = new ui.BaseElement(this.$('.iteration-dropdown'), 'Iteration List Div');
   iterationDropdown = new ui.Dropdown(
-    this.$('#iteration-dropdown > div > span'),
-    this.$('ul.item-ul.dropdown-list'),
+    this.iterationDiv.$('f8-select-dropdown>div>span'),
+    this.iterationDiv.$('.select-dropdown-menu'),
     'Iteration select dropdown'
   );
-  iterationInput = new ui.TextInput(this.$('#valueSearchInput'), 'Iteration input');
-  iterationSaveButton = new ui.Button(this.$('#iteration-dropdown .save-button'), 'Iteration save button');
-  iterationCancelButton = new ui.Button(this.$('#iteration-dropdown .cancel-button'), 'Iteration cancel button');
+  iterationInput = new ui.TextInput(this.iterationDiv.$('.select-dropdown-search-input'), 'Iteration input');
+
 
   labelDropdown = new ui.Dropdown(
     this.$('#labelSelector .add-label'),
