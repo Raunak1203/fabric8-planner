@@ -145,18 +145,22 @@ describe('Planner Smoke Tests:', () => {
 
   it('Create custom query', async() => {
     await planner.sidePanel.clickRequirement();
+    await planner.workItemList.overlay.untilHidden();
     await planner.header.selectFilter('State','in progress');
     await planner.header.saveFilters('Query 1');
     await planner.workItemList.overlay.untilHidden();
+    await planner.sidePanel.customQuery.untilTextIsPresent('Query 1');
     expect(await planner.sidePanel.getMyFiltersList()).toContain('Query 1');
   });
 
   it('Delete custom query', async() => {
     await planner.sidePanel.clickRequirement();
+    await planner.workItemList.overlay.untilHidden();
     await planner.header.selectFilter('State', 'resolved');
     await planner.header.saveFilters('My filter');
     await planner.workItemList.overlay.untilHidden();
     await planner.quickPreview.notificationToast.untilHidden();
+    await planner.sidePanel.customQuery.untilTextIsPresent('My filter');
     expect(await planner.sidePanel.getMyFiltersList()).toContain('My filter');
     await planner.sidePanel.selectcustomFilterKebab('My filter');
     await planner.sidePanel.deleteCustomQuery.clickWhenReady();
@@ -187,7 +191,6 @@ describe('Planner Smoke Tests:', () => {
     await planner.detailPage.titleInput.untilTextIsPresentInValue('new detail workItem');
     await planner.detailPage.close();
     await planner.waitUntilUrlContains('typegroup');
-    await planner.ready();
   });
 });
 
