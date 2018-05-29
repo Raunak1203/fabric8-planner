@@ -145,22 +145,16 @@ describe('Planner Smoke Tests:', () => {
 
   it('Create custom query', async() => {
     await planner.sidePanel.clickRequirement();
-    await planner.workItemList.overlay.untilHidden();
     await planner.header.selectFilter('State','in progress');
-    await planner.workItemList.overlay.untilHidden();
     await planner.header.saveFilters('Query 1');
-    await planner.workItemList.overlay.untilHidden();
     await planner.sidePanel.customQuery.untilTextIsPresent('Query 1');
     expect(await planner.sidePanel.getMyFiltersList()).toContain('Query 1');
   });
 
   it('Delete custom query', async() => {
     await planner.sidePanel.clickRequirement();
-    await planner.workItemList.overlay.untilHidden();
     await planner.header.selectFilter('State', 'resolved');
-    await planner.workItemList.overlay.untilHidden();
     await planner.header.saveFilters('My filter');
-    await planner.workItemList.overlay.untilHidden();
     await planner.quickPreview.notificationToast.untilHidden()
     await planner.sidePanel.customQuery.untilTextIsPresent('My filter');
     expect(await planner.sidePanel.getMyFiltersList()).toContain('My filter');
@@ -186,8 +180,6 @@ describe('Planner Smoke Tests:', () => {
 
   it('Create a work item and Open detail page', async() => {
     await planner.quickAdd.addAndOpenWorkItem('new detail workItem','Scenario');
-    await planner.quickPreview.notificationToast.untilCount(1);
-    await planner.quickPreview.notificationToast.untilHidden();
     await planner.detailPage.closeButton.ready();
     expect(await browser.getCurrentUrl()).toContain('detail');
     await planner.detailPage.titleInput.untilTextIsPresentInValue('new detail workItem');

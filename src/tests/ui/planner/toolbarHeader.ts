@@ -1,8 +1,10 @@
 import { BaseElement } from './../base.element';
-import { ElementFinder, browser, $$ } from 'protractor';
+import { ElementFinder, browser, $$, $ } from 'protractor';
+import { WorkItemList } from './workitem-list';
 import * as ui from '../../ui';
 
 export class ToolbarHeader extends BaseElement {
+  workItemList = new WorkItemList($('alm-work-item-list'));
   notificationToast = new ui.BaseElementArray($$('pfng-toast-notification'), 'Notification Toast');
   header = new BaseElement(this.$('.toolbar-pf-view-selector'), 'header div');
   showTree = new BaseElement(this.$('.toolbar-pf-view-selector #showTree'), 'show Tree');
@@ -36,15 +38,8 @@ export class ToolbarHeader extends BaseElement {
 
   async clickShowTree() {
     await this.ready();
-    while(true) {
-      try {
-        await this.showTree.clickWhenReady();
-        break;
-      } catch(e) {
-        await browser.sleep(1000);
-        await this.notificationToast.untilCount(0);
-      }
-    }
+    await this.showTree.clickWhenReady();
+    await this.workItemList.overlay.untilHidden();
   }
 
   async selectFilter(Label: string, LabelTest: string) {
@@ -53,6 +48,7 @@ export class ToolbarHeader extends BaseElement {
     await this.filterDropdown.select(Label);
     await this.selectFilterCondition.clickWhenReady();
     await this.selectFilterCondition.select(LabelTest);
+    await this.workItemList.overlay.untilHidden();
   }
 
   async clickClearAllFilters() {
@@ -62,21 +58,15 @@ export class ToolbarHeader extends BaseElement {
   async clickShowCompleted() {
     await this.ready();
     await this.showCompleted.untilDisplayed();
-    while(true) {
-      try {
-        await this.showCompleted.clickWhenReady();
-        break;
-      } catch(e) {
-        await browser.sleep(1000);
-        await this.notificationToast.untilCount(0);
-      }
-    }
+    await this.showCompleted.clickWhenReady();
+    await this.workItemList.overlay.untilHidden();
   }
 
   async saveFilters(title) {
     await this.saveFilter.clickWhenReady();
     await this.titleTextInput.enterText(title);
     await this.saveFilterBtn.clickWhenReady();
+    await this.workItemList.overlay.untilHidden();
   }
 
   async getFilterConditions() {
