@@ -329,13 +329,17 @@
           <work-item-link
             [detailContext]="detailContext"
             [workItem]="workItem"
-            [loggedIn]="loggedIn">
+            [loggedIn]="loggedIn"
+            (onLinkClick)="setWorkItem($event.number)">
           </work-item-link>
           <work-item-comment-wrapper
             [workItem]="workItem"
             [loggedInUser]="loggedInUser"
             [loggedIn]="loggedIn">
           </work-item-comment-wrapper>
+          <work-item-event-wrapper
+            [workItem]="workItem">
+          </work-item-event-wrapper>
         </div>
       </div>
     </fieldset>
