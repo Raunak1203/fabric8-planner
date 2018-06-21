@@ -2,22 +2,26 @@ import { $, browser, Key } from 'protractor';
 import { v4 as uuid } from 'uuid';
 import { AppPage } from '../app.page';
 import * as planner from './../../ui/planner';
+import { WorkItemList, WorkItemInlineQuickAdd, SidePanel, WorkItemQuickPreview, ToolbarHeader,Settings, Iteration, WorkItemDetailPage, WorkItem  } from './../../ui/planner';
+import { WorkItemQuickAdd } from './../../ui/planner';
+
+
 import * as support from './../../support';
 
 // this is what you see when you click on the Plan Tab button
 export class PlannerPage extends AppPage {
-  workItemList = new planner.WorkItemList($('alm-work-item-list'));
-  quickAdd =  new planner.WorkItemQuickAdd($('alm-work-item-quick-add'));
-  inlineQuickAdd =  new planner.WorkItemInlineQuickAdd($('#workItemList_quickAdd_inline'));
-  sidePanel = new planner.SidePanel($('aside.f8-sidepanel'));
-  quickPreview = new planner.WorkItemQuickPreview($('work-item-detail'));
-  header = new planner.ToolbarHeader($('#header-div'));
-  settings = new planner.Settings($('div.f8-wi-list__settings'));
-  iteration = new planner.Iteration($('fab-planner-iteration-modal'));
-  detailPage = new planner.WorkItemDetailPage($('work-item-detail'));
-  confirmModalButton = new planner.WorkItemList($('#modal-confirm'));
+  workItemList = new WorkItemList($('alm-work-item-list'));
+  quickAdd =  new WorkItemQuickAdd($('alm-work-item-quick-add'));
+  inlineQuickAdd =  new WorkItemInlineQuickAdd($('#workItemList_quickAdd_inline'));
+  sidePanel = new SidePanel($('aside.f8-sidepanel'));
+  quickPreview = new WorkItemQuickPreview($('work-item-detail'));
+  header = new ToolbarHeader($('#header-div'));
+  settings = new Settings($('div.f8-wi-list__settings'));
+  iteration = new Iteration($('fab-planner-iteration-modal'));
+  detailPage = new WorkItemDetailPage($('work-item-detail'));
+  confirmModalButton = new WorkItemList($('#modal-confirm'));
 
-  constructor(url: string){
+  constructor(url?: string){
     super(url);
   }
 
@@ -30,7 +34,7 @@ export class PlannerPage extends AppPage {
     support.debug(' ... check if Planner page is Ready - OK');
   }
 
-  async createWorkItem(item: planner.WorkItem) {
+  async createWorkItem(item: WorkItem) {
     this.debug('create item', JSON.stringify(item));
     await this.quickAdd.addWorkItem(item);
   }
@@ -40,7 +44,7 @@ export class PlannerPage extends AppPage {
     await this.createWorkItem({"title" : workItemTitle});
     return workItemTitle;
   }
-  async createInlineWorkItem(item: planner.WorkItem) {
+  async createInlineWorkItem(item: WorkItem) {
     this.debug('create inline item', JSON.stringify(item));
     await this.inlineQuickAdd.addInlineWorkItem(item);
   }

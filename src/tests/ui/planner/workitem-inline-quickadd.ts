@@ -1,13 +1,15 @@
-import { BaseElementArray } from './../base.element';
+import { BaseElement, BaseElementArray } from './../base.element';
 import { ElementFinder, $ } from 'protractor';
 import { WorkItem } from './index';
 import * as ui from '../../ui';
+import { TextInput, Dropdown, Button } from '../../ui';
 
-export class WorkItemInlineQuickAdd extends ui.BaseElement {
-  titleTextInlineInput = new ui.TextInput(this.$('input.f8-quickadd-input'), 'Work item inline Title');
+
+export class WorkItemInlineQuickAdd extends BaseElement {
+  titleTextInlineInput = new TextInput(this.$('input.f8-quickadd-input'), 'Work item inline Title');
   buttonsDiv = this.$('div.f8-quickadd__wiblk-btn.pull-right');
-  addInlineQuickAddButton = new ui.Button(this.buttonsDiv.$('#quickadd-save'), 'Add Inline Quick Add Button');
-  workItemTypeDropdown = new ui.Dropdown(
+  addInlineQuickAddButton = new Button(this.buttonsDiv.$('#quickadd-save'), 'Add Inline Quick Add Button');
+  workItemTypeDropdown = new Dropdown(
     this.$('.f8-quickadd__wiblk button.dropdown-toggle'),
     this.$('.f8-quickadd__wiblk .dropdown-menu'),
     'WorkItem Type inline dropdown'
@@ -22,7 +24,7 @@ export class WorkItemInlineQuickAdd extends ui.BaseElement {
     await this.addAndOpenButton.ready();
   }
 
-  async addInlineWorkItem({ title, description = '', type }:WorkItem)  {
+  async addInlineWorkItem({ title, description = '', type = '' }:WorkItem)  {
     await this.workItemTypeDropdown.clickWhenReady();
     await this.workItemTypeDropdown.select(type);
     await this.titleTextInlineInput.ready();

@@ -79,8 +79,8 @@ export class WorkItemList extends BaseElement {
   }
 
   async getUnassignedWorkItemCount(assigneeName: string) {
-    let assignees: any = await this.$$('f8-assignee').getAttribute('innerText');
-    let unassigned:any = assignees.filter(assignee => assignee === assigneeName);
-    return unassigned.length;
+    // let assignees: any = await this.$$('f8-assignee').getAttribute('innerText');
+    // let unassigned:any = assignees.filter(assignee => assignee === assigneeName);
+    // return unassigned.length;
   }
 };

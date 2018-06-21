@@ -1,21 +1,23 @@
 import { $, ElementFinder, by} from 'protractor';
 import  *  as ui from './../../ui';
 import * as support from '../../support';
+import {Button, Clickable, BaseElement, BaseElementArray } from './../../ui';
 
-export class SidePanel extends ui.BaseElement {
-  showHideSidePanelButton = new ui.Button(this.$('.f8-sidepanel--toggle'), 'show/hide side panel button');
-  scenarioButton = new ui.Clickable(this.element(by.cssContainingText('.f8-group-filter__type', ' Scenarios')),'Side panel Scenario button');
-  experienceButton = new ui.Clickable(this.element(by.cssContainingText('.f8-group-filter__type', ' Experiences')),'Side panel Experiences button');
-  requirementsButton = new ui.Clickable(this.element(by.cssContainingText('.f8-group-filter__type .dib', ' Requirements')),'Side panel Requirements button');
-  iterationDiv = new ui.BaseElement(this.$('.f8-itr'),'Iteration div');
-  createIterationButton = new ui.Button(this.iterationDiv.$('#add-iteration-icon'), 'Side panel Add Iteration Button');
-  iterationList = new ui.BaseElementArray(this.$$('.f8-itr__tree .f8-itr-name'),'Iteration list');
-  iterationKebab = new ui.Button(this.$('.dropdown-toggle'), 'Side panel Iteration Kebab Dropdown');
-  editIteration = new ui.Clickable(this.element(by.cssContainingText('.f8-itr .dropdown.open ul>li','Edit')), 'Iteration Dropdown Edit Option');
-  iterationHeader = new ui.BaseElementArray(this.$$('.f8-itr__header'), 'iteration header');
-  customQuery = new ui.BaseElement(this.$('custom-query'), 'My filters')
-  customQueryList = new ui.BaseElementArray(this.$$('.f8-cf__list-type'),' My filters list');
-  deleteCustomQuery = new ui.Clickable(this.element(by.cssContainingText('.f8-cf-kebab.dropdown.open ul>li', 'Delete')), 'Custom query Dropdown Delete Option');
+
+export class SidePanel extends BaseElement {
+  showHideSidePanelButton = new Button(this.$('.f8-sidepanel--toggle'), 'show/hide side panel button');
+  scenarioButton = new Clickable(this.element(by.cssContainingText('.f8-group-filter__type', ' Scenarios')),'Side panel Scenario button');
+  experienceButton = new Clickable(this.element(by.cssContainingText('.f8-group-filter__type', ' Experiences')),'Side panel Experiences button');
+  requirementsButton = new Clickable(this.element(by.cssContainingText('.f8-group-filter__type .dib', ' Requirements')),'Side panel Requirements button');
+  iterationDiv = new BaseElement(this.$('.f8-itr'),'Iteration div');
+  createIterationButton = new Button(this.iterationDiv.$('#add-iteration-icon'), 'Side panel Add Iteration Button');
+  iterationList = new BaseElementArray(this.$$('.f8-itr__tree .f8-itr-name'),'Iteration list');
+  iterationKebab = new Button(this.$('.dropdown-toggle'), 'Side panel Iteration Kebab Dropdown');
+  editIteration = new Clickable(this.element(by.cssContainingText('.f8-itr .dropdown.open ul>li','Edit')), 'Iteration Dropdown Edit Option');
+  iterationHeader = new BaseElementArray(this.$$('.f8-itr__header'), 'iteration header');
+  customQuery = new BaseElement(this.$('custom-query'), 'My filters')
+  customQueryList = new BaseElementArray(this.$$('.f8-cf__list-type'),' My filters list');
+  deleteCustomQuery = new Clickable(this.element(by.cssContainingText('.f8-cf-kebab.dropdown.open ul>li', 'Delete')), 'Custom query Dropdown Delete Option');
 
   constructor(ele: ElementFinder, name: string = 'WorkItem List page Side Panel') {
     super(ele, name);

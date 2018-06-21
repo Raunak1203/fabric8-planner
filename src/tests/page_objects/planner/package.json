@@ -1,0 +1,14 @@
+{
+  "name": "planner-functional-test",
+  "version": "0.0.1",
+  "description": "This packagae contains page objects for planner",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raunak Bajpai",
+  "license": "ISC",
+  "dependencies": {
+    "@types/uuid": "^3.4.3"
+  }
+}
