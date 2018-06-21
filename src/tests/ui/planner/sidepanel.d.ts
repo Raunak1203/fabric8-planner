@@ -1,0 +1,30 @@
+import { ElementFinder } from 'protractor';
+import { Button, Clickable, BaseElement, BaseElementArray } from './../../ui';
+export declare class SidePanel extends BaseElement {
+    showHideSidePanelButton: Button;
+    scenarioButton: Clickable;
+    experienceButton: Clickable;
+    requirementsButton: Clickable;
+    iterationDiv: BaseElement;
+    createIterationButton: Button;
+    iterationList: BaseElementArray;
+    iterationKebab: Button;
+    editIteration: Clickable;
+    iterationHeader: BaseElementArray;
+    customQuery: BaseElement;
+    customQueryList: BaseElementArray;
+    deleteCustomQuery: Clickable;
+    constructor(ele: ElementFinder, name?: string);
+    ready(): Promise<void>;
+    clickScenarios(): Promise<void>;
+    clickExperience(): Promise<void>;
+    clickRequirement(): Promise<void>;
+    createNewIteration(): Promise<void>;
+    getIterationList(): Promise<String[]>;
+    selectIterationKebab(iterationName: string): Promise<void>;
+    openIterationDialogue(): Promise<void>;
+    getIterationDate(): Promise<String>;
+    clickExpander(iterationName: string): Promise<void>;
+    getMyFiltersList(): Promise<String[]>;
+    selectcustomFilterKebab(queryName: string): Promise<void>;
+}

@@ -3,6 +3,7 @@ import * as ui from '../../ui';
 import { BaseElementArray } from './../base.element';
 import { WorkItem } from './index';
 
+
 export class WorkItemInlineQuickAdd extends ui.BaseElement {
   titleTextInlineInput = new ui.TextInput(this.$('input.f8-quickadd-input'), 'Work item inline Title');
   buttonsDiv = this.$('div.f8-quickadd__wiblk-btn.pull-right');
