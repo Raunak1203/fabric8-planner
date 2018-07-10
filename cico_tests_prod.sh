@@ -11,7 +11,7 @@ set -e
 # that might interest this worker
 if [ -e "../jenkins-env" ]; then
   cat ../jenkins-env \
-    | grep -E "(JENKINS_URL|GIT_BRANCH|GIT_COMMIT|USER_NAME|PASSWORD|BUILD_NUMBER|EE_TEST_OSIO_TOKEN|ARTIFACT_PASS)=" \
+    | grep -E "(JENKINS_URL|GIT_BRANCH|GIT_COMMIT|USER_NAME|PASSWORD|BUILD_NUMBER|REFRESH_TOKEN|ARTIFACT_PASS)=" \
     | sed 's/^/export /g' \
     > /tmp/jenkins-env
   source /tmp/jenkins-env
@@ -36,6 +36,5 @@ echo "Container name: $CID"
 
 docker exec $CID bash -c 'npm install && cd tests/ && npm install'
 
-docker exec -t -e REFRESH_TOKEN=$EE_TEST_OSIO_TOKEN $CID bash -c \
-  "cd tests && WEBDRIVER_VERSION=2.37 DEBUG=true HEADLESS_MODE=true USER_NAME="rgarg-osiotest1" FABRIC8_WIT_API_URL="https://api.openshift.io/" BASE_URL='https://openshift.io/' ./run_e2e_tests.sh"
-
+docker exec -t -e REFRESH_TOKEN=$REFRESH_TOKEN $CID bash -c \
+  "cd tests && WEBDRIVER_VERSION=2.37 DEBUG=true HEADLESS_MODE=true USER_NAME="osio-ci-planner-002" FABRIC8_WIT_API_URL="https://api.openshift.io/" BASE_URL='https://openshift.io/' ./run_e2e_tests.sh"
