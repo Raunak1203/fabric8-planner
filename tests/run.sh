@@ -129,7 +129,7 @@ main() {
     echo
   fi
 
-  AUTH_TOKEN=$AUTH_TOKEN REFRESH_TOKEN=$REFRESH_TOKEN $protractor --baseUrl "${base_url}" \
+  EE_TEST_USERNAME=$EE_TEST_USERNAME EE_TEST_PASSWORD=$EE_TEST_PASSWORD $protractor --baseUrl "${base_url}" \
     --specs "${specs_pattern}" \
     --exclude "node_modules/**/*.spec.js" \
     --suite "${suite}" \

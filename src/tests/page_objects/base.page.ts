@@ -1,7 +1,8 @@
-import { browser, ExpectedConditions } from 'protractor';
+import { $, $$, browser, ExpectedConditions } from 'protractor';
 import * as mixins from '../mixins';
 import * as support from '../support';
 import { DEFAULT_WAIT } from '../support';
+import { BaseElementArray, Button, TextInput } from '../ui';
 
 export enum PageOpenMode {
   AlreadyOpened,
@@ -10,6 +11,11 @@ export enum PageOpenMode {
 
 export abstract class BasePage {
   // add logging mixin
+  navBarLogin = new Button($('#login'), 'nav bar login');
+  usernameInput = new TextInput($('#username'), 'username');
+  passwordInput = new TextInput($('#password'), 'password');
+  loginButton = new Button($('#kc-login'), 'Login');
+  progress = new BaseElementArray($$('.progress'), 'progressBar');
 
   name: string = '...';
   log: (action: string, ...msg: string[]) => void;
@@ -47,7 +53,7 @@ export abstract class BasePage {
       throw Error('Trying to open an undefined url');
     }
     this.log('Authenticating with Auth and Refresh token');
-    await support.loginWithTokens();
+    await this.login(process.env.EE_TEST_USERNAME, process.env.EE_TEST_PASSWORD);
     this.log('Opening', this.url);
     let currentUrl = await browser.getCurrentUrl();
     this.debug('at  :', currentUrl);
@@ -57,6 +63,22 @@ export abstract class BasePage {
 
     let urlNow = await browser.getCurrentUrl();
     this.debug('now :', urlNow);
+  }
+
+  async login(username: string, password: string): Promise<void> {
+    this.log('base url set');
+    await browser.get(browser.baseUrl);
+    this.log('progress count 0');
+    await this.progress.untilCount(0);
+    await browser.sleep(60 * 1000);
+    this.log('click nav bar');
+    await this.navBarLogin.clickWhenReady();
+    await this.loginButton.untilTextIsPresentInValue('Log in');
+    this.debug('... Login: input details and click Login');
+    await this.usernameInput.enterText(username);
+    await this.passwordInput.enterText(password);
+    await this.loginButton.clickWhenReady();
+    await this.waitUntilUrlContains('_home');
   }
 
   async waitUntilUrlContains(text: string, timeout?: number) {
