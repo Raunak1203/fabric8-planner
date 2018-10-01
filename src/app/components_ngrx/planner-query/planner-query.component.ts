@@ -72,6 +72,7 @@ export class PlannerQueryComponent implements OnInit, OnDestroy, AfterViewChecke
   public columns: any[];
   public selectedRows: any = [];
   public searchQuery: string = '';
+  public isCreateWorkitemDropdownOpen: boolean;
 
   private eventListeners: any[] = [];
   private hdrHeight: number = 0;
@@ -201,6 +202,14 @@ export class PlannerQueryComponent implements OnInit, OnDestroy, AfterViewChecke
         prevq: JSON.stringify(prevq)
       }
     });
+  }
+
+  closeCreateWorkItemDialog(event) {
+    this.isCreateWorkitemDropdownOpen = false;
+  }
+
+  createWorkItemDialogChange(value: boolean) {
+    this.isCreateWorkitemDropdownOpen = value;
   }
 
   ngAfterViewChecked() {
