@@ -4,7 +4,7 @@ import { LabelUI } from '../../models/label.model';
 import { orderBy } from 'lodash';
 
 
-describe('Work Item Detail Page', () => {
+xdescribe('Work Item Detail Page', () => {
   let iterations = [{
     id: '',
     name: 'iter-c',
